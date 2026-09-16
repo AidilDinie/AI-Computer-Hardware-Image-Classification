@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Klasifikasi Perkakasan Komputer AI</title>
+    <!-- Modern Futuristic Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow-orb primary"></div>
+        <div class="glow-orb secondary"></div>
+    </div>
+    
+    <div class="container">
+        <header class="header-section">
+            <div class="logo-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+            </div>
+            <h1>Hardware Vision AI</h1>
+            <p>Sistem Pengkelasan Imej Perkakasan Komputer Pintar</p>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Left Panel: Input Section -->
+            <section class="panel glass-card">
+                <div class="panel-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-9 5 18 3-9h6"/></svg>
+                    <h2>Input Imej</h2>
+                </div>
+                
+                <div class="controls-group">
+                    <button id="btn-start-camera" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                        Buka Kamera
+                    </button>
+                    
+                    <div class="divider">
+                        <span>ATAU</span>
+                    </div>
+                    
+                    <label for="image-upload" class="btn btn-secondary upload-label">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        Pilih Gambar
+                    </label>
+                    <input type="file" id="image-upload" accept="image/jpeg, image/png, image/webp" class="hidden-input">
+                </div>
+
+                <div id="camera-container" class="media-container hidden">
+                    <div class="scanner-overlay"></div>
+                    <video id="webcam" autoplay playsinline></video>
+                </div>
+            </section>
+
+            <!-- Right Panel: Output & Result Section -->
+            <section class="panel glass-card result-panel">
+                <div class="panel-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <h2>Analisis AI</h2>
+                </div>
+                
+                <!-- Image Preview Area -->
+                <div id="preview-container" class="preview-box empty-state">
+                    <img id="image-preview" src="" alt="Pratonton" class="hidden">
+                    <canvas id="canvas" class="hidden"></canvas>
+                    <div id="empty-message" class="placeholder-content">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        <p>Ruangan imej kosong.<br>Sila masukkan imej dari panel kiri.</p>
+                    </div>
+                </div>
+
+                <!-- Error & Status Alerts -->
+                <div id="status-message" class="alert-box alert-success hidden"></div>
+                <div id="error-message" class="alert-box alert-error hidden"></div>
+
+                <!-- Loading State -->
+                <div id="loading-state" class="loading-wrapper hidden">
+                    <div class="loader-ring"></div>
+                    <p class="loader-text">Menjalankan Rangkaian Neural...</p>
+                </div>
+
+                <!-- Prediction Results -->
+                <div id="prediction-result" class="results-wrapper hidden">
+                    <div class="data-group">
+                        <span class="data-label">PREDICTION</span>
+                        <div id="class-name" class="data-value highlight">Keyboard</div>
+                    </div>
+                    
+                    <div class="data-group">
+                        <div class="confidence-header">
+                            <span class="data-label">CONFIDENCE</span>
+                            <span id="confidence-score" class="data-value percentage">94%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div id="confidence-fill" class="progress-fill" style="width: 0%;">
+                                <div class="progress-glow"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-group">
+                        <span class="data-label">STATUS</span>
+                        <div class="data-value status-text">Classification Successful</div>
+                    </div>
+                </div>
+
+                <div class="action-footer">
+                    <button id="btn-reset" class="btn btn-outline hidden">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                        Reset Analisis
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js?v=3"></script>
+</body>
+</html>

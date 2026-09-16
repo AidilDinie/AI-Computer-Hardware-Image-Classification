@@ -1,0 +1,26 @@
+# ============================================
+# FA DKB3263 - AI Computer Hardware Classifier
+# Senarai pakej Python yang diperlukan
+# ============================================
+
+# FastAPI - framework web untuk membina API
+fastapi>=0.115.0
+
+# Uvicorn - pelayan ASGI untuk menjalankan FastAPI
+uvicorn>=0.30.6
+
+# Python-multipart - untuk mengendalikan muat naik fail (upload)
+python-multipart>=0.0.9
+
+# Pillow - untuk memproses imej
+Pillow>=11.0.0
+
+# NumPy - untuk pengiraan array dan matriks
+numpy>=1.26.4
+
+# TensorFlow - untuk memuatkan model Teachable Machine Keras (.h5)
+tensorflow>=2.14.0
+
+# tf-keras - diperlukan supaya TensorFlow guna Keras 2 legacy (TF_USE_LEGACY_KERAS=1)
+# Model Teachable Machine (.h5) tidak serasi dengan Keras 3 (default TF 2.16+)
+tf-keras>=2.16.0
